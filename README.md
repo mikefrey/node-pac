@@ -19,6 +19,15 @@ Usage
 
 From a command prompt, run `packmod` from your project's root directory.
 
+You'll see a new `.modules` that contains gzipped tarballs of your
+dependencies. When deploying, you'll probably need a script that installs
+your modules from the `.modules` directory. npm natively supports
+installing them:
+
+```
+npm install .modules/mkdirp@0.3.5.tgz
+```
+
 TODO
 ----
 
