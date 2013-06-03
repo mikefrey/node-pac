@@ -20,10 +20,12 @@
   "readmeFilename": "README.md",
   "gitHead": "4681b5f3075008845b8e397a4cd49abac7c09f9a",
   "dependencies": {
-    "tar": "~0.1.17",
     "mkdirp": "~0.3.5",
     "glob": "~3.2.1",
     "semver": "~1.1.4",
     "tar.gz": "~0.1.1"
+  },
+  "bin": {
+    "packmod": "./bin/packmod"
   }
 }

@@ -5,8 +5,10 @@ var Path = require('path')
 var glob = require('glob')
 var semver = require('semver')
 
-var pkgjson = require(Path.join(__dirname, 'package.json'))
-var modulePath = Path.join(__dirname, '.modules')
+var cwd = process.cwd()
+
+var pkgjson = require(Path.join(cwd, 'package.json'))
+var modulePath = Path.join(cwd, '.modules')
 
 var sep = '@'
 
@@ -25,20 +27,22 @@ var error = function() {
 var tryRequire = function(p) {
   try {
     return require(p)
-  } catch(ex) {}
+  } catch(ex) {
+    error('Failed to load', p)
+  }
   return null
 }
 
 var pack = function(name, version) {
   log('Packing', name+sep+version)
-  var source = Path.join(__dirname, 'node_modules', name)
+  var source = Path.join(cwd, 'node_modules', name)
   var dest = Path.join(modulePath, name+sep+version+'.tgz')
-  new targz().compress(source, dest, function(err) {
+  new tgz().compress(source, dest, function(err) {
     if (err)
       error('Failed to pack', name)
     else
       log('Packed', name)
-  }
+  })
 }
 
 
@@ -76,32 +80,11 @@ Object.keys(curMods).forEach(function(name) {
 Object.keys(deps).forEach(function(name) {
   var needs = deps[name]
   if (!curMods[name]) {
-    var pkg = tryRequire(Path.join('./node_modules', name, 'package.json'))
-    if (pkg && semver.satisfies(pkg.version, needs]) {
+    var pkg = tryRequire(Path.join(cwd, 'node_modules', name, 'package.json'))
+    if (pkg && semver.satisfies(pkg.version, needs)) {
       pack(name, pkg.version)
     } else {
       error('Unmet dependency', name+sep+needs)
     }
   }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var gzip = zlib.createGzip()
-var inp = fs.createReadStream('input.txt')
-var out = fs.createWriteStream('input.txt.gz')
-
-inp.pipe(gzip).pipe(out);
-
