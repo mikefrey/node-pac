@@ -1,0 +1,29 @@
+{
+  "name": "packmod",
+  "version": "0.0.1",
+  "description": "pack your node_modules as *.tgz files for version control and easy deploys",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mikefrey/node-packmod.git"
+  },
+  "keywords": [
+    "module",
+    "packaging",
+    "deploy"
+  ],
+  "author": "Mike Frey <frey.mike@gmail.com>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "4681b5f3075008845b8e397a4cd49abac7c09f9a",
+  "dependencies": {
+    "tar": "~0.1.17",
+    "mkdirp": "~0.3.5",
+    "glob": "~3.2.1",
+    "semver": "~1.1.4",
+    "tar.gz": "~0.1.1"
+  }
+}
