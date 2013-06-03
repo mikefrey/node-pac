@@ -10,7 +10,7 @@ var cwd = process.cwd()
 var pkgjson = require(Path.join(cwd, 'package.json'))
 var modulePath = Path.join(cwd, '.modules')
 
-var sep = '@'
+var sep = '-v'
 
 // ensure that the .modules directory exists
 mkdirp.sync(modulePath)
@@ -48,8 +48,10 @@ var pack = function(name, version) {
 
 var filesToHash = function(files) {
   return curFiles.reduce(function(memo, file) {
-  var f = file.replace(/\.tgz$/i, '').split(sep)
-  memo[f[0]] = f[1]
+  file = file.replace(/\.tgz$/i, '')
+  var name = file.substring(0, file.lastIndexOf(sep))
+  var version = file.substring(file.lastIndexOf(sep)+sep.length)
+  memo[name] = version
   return memo
 }, {})
 }

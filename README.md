@@ -25,7 +25,7 @@ your modules from the `.modules` directory. npm natively supports
 installing them:
 
 ```
-npm install .modules/mkdirp@0.3.5.tgz
+npm install .modules/mkdirp-v0.3.5.tgz
 ```
 
 TODO
