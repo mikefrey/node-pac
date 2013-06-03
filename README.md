@@ -27,12 +27,3 @@ installing them:
 ```
 npm install .modules/mkdirp-v0.3.5.tgz
 ```
-
-TODO
-----
-
-* add support for tagged versions
-* add support for modules installed from a repo url
-* tests
-* refactoring
-
