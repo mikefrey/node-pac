@@ -3,7 +3,6 @@ var tgz = require('tar.gz')
 var mkdirp = require('mkdirp')
 var Path = require('path')
 var glob = require('glob')
-var semver = require('semver')
 var async = require('async')
 var _ = require('underscore')
 

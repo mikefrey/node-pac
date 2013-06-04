@@ -1,4 +1,4 @@
-node-packmod
+node-pac
 ============
 
 Pack your node_modules as *.tgz files for version control and easy deploys
@@ -12,12 +12,12 @@ diffs and makes code reviews shitty.
 Installation
 ------------
 
-`npm install -g packmod`
+`npm install -g pac`
 
 Usage
 -----
 
-From a command prompt, run `packmod` from your project's root directory.
+From a command prompt, run `pac` from your project's root directory.
 
 You'll see a new `.modules` that contains gzipped tarballs of your
 dependencies. When deploying, you'll probably need a script that installs
