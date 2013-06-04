@@ -21,10 +21,11 @@
   "gitHead": "4681b5f3075008845b8e397a4cd49abac7c09f9a",
   "dependencies": {
     "mkdirp": "~0.3.5",
-    "glob": "latest",
+    "glob": "~3.2.1",
     "semver": "~1.1.4",
     "tar.gz": "~0.1.1",
-    "async": "~0.2.9"
+    "async": "~0.2.9",
+    "underscore": "~1.4.4"
   },
   "bin": {
     "packmod": "./bin/packmod"
