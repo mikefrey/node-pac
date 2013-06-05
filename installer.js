@@ -43,7 +43,7 @@ module.exports = function() {
     })
 
   }, function() {
-    log('Done! Now run \'npm rebuild\'')
+    log('\nDone! Now run \'npm rebuild\'')
   })
 
 }
