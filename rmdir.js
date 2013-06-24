@@ -2,8 +2,6 @@ var fs = require('fs')
 
 var rmdir = module.exports = function(dirPath) {
   var files = fs.readdirSync(dirPath)
-  // try { var files = fs.readdirSync(dirPath) }
-  // catch(e) { return }
   if (files.length > 0)
     for (var i = 0; i < files.length; i++) {
       var filePath = dirPath + '/' + files[i]
