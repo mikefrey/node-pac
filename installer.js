@@ -4,7 +4,7 @@ var mkdirp = require('mkdirp')
 var Path = require('path')
 var glob = require('glob')
 var async = require('async')
-var rmdir = require('./rmdir')
+var rmrf = require('rmrf')
 
 var log = function() {
   console.log.apply(console, arguments)
@@ -32,7 +32,7 @@ module.exports = function() {
 
     // remove existing installed module
     if (fs.existsSync(Path.join(nodeModulesPath, name))) {
-      rmdir(Path.join(nodeModulesPath, name))
+      rmrf(Path.join(nodeModulesPath, name))
     }
 
     // extract the module into node_modules
