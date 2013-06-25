@@ -4,7 +4,7 @@ var mkdirp = require('mkdirp')
 var Path = require('path')
 var glob = require('glob')
 var async = require('async')
-
+var rmrf = require('rmrf')
 
 var log = function() {
   console.log.apply(console, arguments)
@@ -32,7 +32,7 @@ module.exports = function() {
 
     // remove existing installed module
     if (fs.existsSync(Path.join(nodeModulesPath, name))) {
-      fs.rmdirSync(Path.join(nodeModulesPath, name))
+      rmrf(Path.join(nodeModulesPath, name))
     }
 
     // extract the module into node_modules
@@ -43,7 +43,7 @@ module.exports = function() {
     })
 
   }, function() {
-    log('Done! Now run \'npm rebuild\'')
+    log('\nDone! Now run \'npm rebuild\'')
   })
 
 }
