@@ -16,7 +16,7 @@ var error = function() {
 }
 
 
-module.exports = function() {
+module.exports = function(targetModule) {
 
   var cwd = process.cwd()
   var pkgjson = require(Path.join(cwd, 'package.json'))
@@ -52,41 +52,63 @@ module.exports = function() {
   // get dependency list
   var deps = pkgjson.dependencies
 
-  // get a list of currently installed node_modules
-  var curInst = glob.sync('node_modules/*/package.json', {cwd:cwd}).reduce(function(memo, file) {
-    file = Path.join(cwd, file)
-    var pkg = require(file)
-    memo[pkg.name] = pkg.version
-    return memo
-  }, {})
-
-
-  // remove any packed modules that are not in the dependencies list
-  _.difference(Object.keys(curMods), Object.keys(deps)).forEach(function(name) {
-    var fv = name+sep+curMods[name]
-    log('Module ', fv, 'is not in the dependencies list, removing it.')
-    fs.unlinkSync(Path.join(modulePath, fv+'.tgz'))
-  })
-
-  // warn about missing deps
-  _.difference(Object.keys(deps), Object.keys(curInst)).forEach(function(name) {
-    error('WARNING:', name, 'is not installed!')
-  })
-
-
-  // Updated any dependencies that have different versions
-  // and pack any that are missing completely
-  async.eachSeries(Object.keys(curInst), function(name, cb) {
-    if (!deps[name]) return cb()
-    if (curInst[name] === curMods[name]) return cb()
-    if (!curMods[name]) {
-      log('Adding', name+sep+curInst[name])
+  // fail if the user specified a module that doesn't exist
+  if (targetModule && !deps[targetModule]) {
+    error(targetModule + ' doesn\'t exist')
+    process.exit(1)
+  }
+  // check for a specific module to pac
+  else if (targetModule && deps[targetModule]) {
+    var name = targetModule
+    var file, version
+    try {
+      file = require(Path.join(process.cwd(), 'node_modules', name, 'package.json'))
+      version = file.version
+    } catch(e) {
+      error(e)
+      process.exit(1)
     }
-    if (curMods[name] && curInst[name] !== curMods[name]) {
-      log('Module', name, 'has changed from ', curMods[name], 'to', curInst[name])
-      fs.unlinkSync(Path.join(modulePath, name+sep+curMods[name]+'.tgz'))
-    }
-    return pack(name, curInst[name], cb)
-  })
+    log('Adding', name+sep+file.version)
+    pack(name, version, function() { process.exit(0) })
+  }
+  // otherwise pac them all
+  else {
+
+    // get a list of currently installed node_modules
+    var curInst = glob.sync('node_modules/*/package.json', {cwd:cwd}).reduce(function(memo, file) {
+      file = Path.join(cwd, file)
+      var pkg = require(file)
+      memo[pkg.name] = pkg.version
+      return memo
+    }, {})
+
+    // remove any packed modules that are not in the dependencies list
+    _.difference(Object.keys(curMods), Object.keys(deps)).forEach(function(name) {
+      var fv = name+sep+curMods[name]
+      log('Module ', fv, 'is not in the dependencies list, removing it.')
+      fs.unlinkSync(Path.join(modulePath, fv+'.tgz'))
+    })
+
+    // warn about missing deps
+    _.difference(Object.keys(deps), Object.keys(curInst)).forEach(function(name) {
+      error('WARNING:', name, 'is not installed!')
+    })
+
+    // Updated any dependencies that have different versions
+    // and pack any that are missing completely
+    async.eachSeries(Object.keys(curInst), function(name, cb) {
+      if (!deps[name]) return cb()
+      if (curInst[name] === curMods[name]) return cb()
+      if (!curMods[name]) {
+        log('Adding', name+sep+curInst[name])
+      }
+      if (curMods[name] && curInst[name] !== curMods[name]) {
+        log('Module', name, 'has changed from ', curMods[name], 'to', curInst[name])
+        fs.unlinkSync(Path.join(modulePath, name+sep+curMods[name]+'.tgz'))
+      }
+      return pack(name, curInst[name], cb)
+    })
+
+  }
 
 }

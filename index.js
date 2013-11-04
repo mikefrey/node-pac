@@ -5,6 +5,7 @@ var installer = require('./installer.js')
 if (~process.argv.indexOf('install')) {
   installer()
 } else {
-  packer()
+  var arg = process.argv[0] == 'node' ? process.argv[2] : process.argv[1]
+  packer(arg)
 }
 
