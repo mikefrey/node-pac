@@ -9,6 +9,8 @@ Why?
 Because commiting the `node_modules` into source control sucks. It kills
 diffs and makes code reviews shitty.
 
+Read more in my [blog post](http://www.codinginthecrease.com/news_article/show/307636).
+
 Installation
 ------------
 
