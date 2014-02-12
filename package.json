@@ -13,7 +13,8 @@
     "glob": "~3.2.1",
     "tar.gz": "~0.1.1",
     "async": "~0.2.9",
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "commander": "~2.1.0"
   },
   "bin": {
     "pac": "./bin/pac"
