@@ -1,0 +1,10 @@
+{
+  "name": "pacNpmTest",
+  "dependencies": {
+    "moduleA": "~0.1.0",
+    "moduleB": "~0.2.0"
+  },
+  "devDependencies": {
+    "moduleC": "0.3.0"
+  }
+}
