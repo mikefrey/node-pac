@@ -3,7 +3,6 @@
 var _ = require('underscore');
 var async = require('async');
 var glob = require('glob');
-var should = require('should');
 var fs = require('fs-extra');
 var tgz = require('tar.gz');
 var Path = require('path');
