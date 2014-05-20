@@ -7,7 +7,7 @@ Why?
 ----
 
 Because commiting the `node_modules` into source control sucks. It kills
-diffs and makes code reviews shitty.
+diffs and makes code reviews difficult.
 
 Read more in my [blog post](http://www.codinginthecrease.com/news_article/show/307636).
 
@@ -19,13 +19,32 @@ Installation
 Usage
 -----
 
+```
+  Usage: pac [options] [packageName ...]
+
+  Options:
+
+    -h, --help             output usage information
+    -i, install            Install packages
+    -P, --production       Install/Pack production packages
+    -s, --strategy [type]  Uses specified strategy [npm|bower] to install/pack packages. Default is "npm"
+    -v, --verbose          Logs out verbose log messages
+
+  Examples:
+
+    $ pac -P install
+    $ pac grunt
+    $ pac -s bower install
+    $ pac -s bower angular
+```
+
 From a command prompt, run `pac` from your project's root directory.
 
-You'll see a new `.modules` that contains gzipped tarballs of your
-dependencies. When deploying, you'll probably need a script that installs
-your modules from the `.modules` directory. npm natively supports
-installing them:
+You'll see a new `.modules` directory that contains gzipped tarballs of your
+dependencies. When deploying, you can use pac to install the modules:
 
 ```
-npm install .modules/mkdirp-v0.3.5.tgz
+mkdir -p node_modules
+pac install
+npm rebuild
 ```
