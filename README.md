@@ -27,7 +27,8 @@ Usage
     -h, --help             output usage information
     -i, install            Install packages
     -P, --production       Install/Pack production packages
-    -s, --strategy [type]  Uses specified strategy [npm|bower] to install/pack packages. Default is "npm"
+    -s, --strategy [type]  Uses specified strategy [npm|bower] to install/pack
+                           packages. Default is "npm".
     -v, --verbose          Logs out verbose log messages
 
   Examples:
