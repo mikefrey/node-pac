@@ -1,6 +1,6 @@
 {
   "name": "pac",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "pack your node_modules as *.tgz files for version control and easy deploys",
   "main": "index.js",
   "preferGlobal": true,
