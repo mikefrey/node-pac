@@ -1,5 +1,6 @@
 'use strict';
 
+var should = require('chai').should();
 var _ = require('underscore');
 var async = require('async');
 var glob = require('glob');
