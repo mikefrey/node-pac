@@ -1,6 +1,8 @@
 node-pac
 ============
 
+[![Gitter](https://badges.gitter.im/mikefrey/node-pac.svg)](https://gitter.im/mikefrey/node-pac)
+
 Pack your node_modules as *.tgz files for version control and easy deploys
 
 Why?
