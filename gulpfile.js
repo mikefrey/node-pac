@@ -34,7 +34,7 @@ gulp.task('jshint', ['beautify'], function() {
     .pipe($.jshint.reporter('fail'));
 });
 
-gulp.task('istanbul', ['jshint'], function() {
+gulp.task('istanbul', function() {
   return gulp.src('./lib/**/*.js').pipe($.istanbul());
 });
 
